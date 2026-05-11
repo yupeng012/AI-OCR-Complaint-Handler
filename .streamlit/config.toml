@@ -1,0 +1,18 @@
+# Streamlit Cloud Configuration
+# This file tells Streamlit Cloud how to deploy the app
+
+[server]
+headless = true
+port = 8501
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#00ff9d"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#262730"
+textColor = "#ffffff"
