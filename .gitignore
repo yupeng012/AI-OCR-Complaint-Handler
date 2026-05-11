@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets - NEVER commit these!
+.streamlit/secrets.toml
+*.env
+.env.local
+.env.*.local
+
+# Data files (optional - keep locally)
+data/*.json
+data/*.xlsx
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Deployment specific
+deploy-*.sh
+!deploy-on-server.sh
