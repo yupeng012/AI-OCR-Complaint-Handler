@@ -1,0 +1,185 @@
+╔══════════════════════════════════════════════════════════════╗
+║  🚀 部署到 yupeng-ai.cn - 完整指南                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 当前应用状态
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 本地运行端口：http://localhost:8504
+✅ 应用文件：/Users/wtueeq/AI-OCR-Complaint-Handler/app/unified_app.py
+✅ 功能完整：Single/Batch 分析、Excel 导出、Telegram 提醒、自定义模板
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 🎯 部署方案选择
+
+### 方案 A：Streamlit Cloud（最简单 ⭐推荐）
+  难度：⭐
+  成本：免费
+  时间：5 分钟
+  适合：快速上线、测试、小规模使用
+
+### 方案 B：VPS 部署（生产环境）
+  难度：⭐⭐⭐
+  成本：$5-20/月
+  时间：15 分钟
+  适合：生产环境、完全控制、自定义需求
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 📝 部署步骤
+
+### 方案 A：Streamlit Cloud（推荐新手）
+
+1️⃣ 推送到 GitHub
+   cd /Users/wtueeq/AI-OCR-Complaint-Handler
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/YOUR_USERNAME/AI-OCR-Complaint-Handler.git
+   git push -u origin main
+
+2️⃣ 部署到 Streamlit Cloud
+   - 访问：https://streamlit.io/cloud
+   - 用 GitHub 登录
+   - 选择你的仓库
+   - 点击 "Deploy!"
+
+3️⃣ 配置域名
+   - 在 Streamlit Cloud 控制台 → Settings → Domain
+   - 输入：yupeng-ai.cn
+   - 按提示在域名商处添加 CNAME 记录
+
+4️⃣ 配置环境变量
+   在 Streamlit Cloud 控制台的 Secrets 中添加：
+   [telegram]
+   bot_token = "YOUR_BOT_TOKEN"
+   chat_id = "YOUR_CHAT_ID"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 方案 B：VPS 部署（生产环境）
+
+前提条件:
+  □ Ubuntu 服务器（20.04+）
+  □ 域名 yupeng-ai.cn 已解析到服务器 IP
+  □ SSH 访问权限
+  □ 服务器 IP：_______________
+
+步骤：
+
+1️⃣ 连接服务器
+   ssh user@your-server-ip
+
+2️⃣ 运行快速部署脚本
+   cd /tmp
+   curl -O https://raw.githubusercontent.com/YOUR_USERNAME/AI-OCR-Complaint-Handler/main/quick-deploy.sh
+   chmod +x quick-deploy.sh
+   
+   # 编辑脚本配置
+   nano quick-deploy.sh
+   # 修改：EMAIL 和 GITHUB_REPO
+   
+   # 执行部署
+   ./quick-deploy.sh
+
+3️⃣ 验证部署
+   curl https://yupeng-ai.cn
+   
+4️⃣ 配置 Telegram（可选）
+   sudo nano /var/www/AI-OCR-Complaint-Handler/.streamlit/secrets.toml
+   
+   添加：
+   [telegram]
+   bot_token = "YOUR_BOT_TOKEN"
+   chat_id = "YOUR_CHAT_ID"
+   
+   sudo systemctl restart ai-complaint
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 📊 部署后验证
+
+访问测试:
+  □ https://yupeng-ai.cn - 主页加载正常
+  □ 上传测试图片 - OCR 识别正常
+  □ 情感分析 - 结果准确
+  □ 生成工单 - 保存成功
+  □ Excel 导出 - 下载正常
+  □ Telegram 通知 - 收到提醒
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 🔧 常用运维命令
+
+查看状态:
+  sudo systemctl status ai-complaint
+  sudo systemctl status nginx
+
+查看日志:
+  sudo journalctl -u ai-complaint -f
+  sudo tail -f /var/log/nginx/yupeng-ai.cn-error.log
+
+重启服务:
+  sudo systemctl restart ai-complaint
+  sudo systemctl restart nginx
+
+更新应用:
+  cd /var/www/AI-OCR-Complaint-Handler
+  sudo -u ubuntu git pull
+  sudo -u ubuntu ./venv/bin/pip install -r requirements.txt
+  sudo systemctl restart ai-complaint
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 📁 部署相关文件
+
+已生成的文件:
+  ✅ /Users/wtueeq/AI-OCR-Complaint-Handler/
+     ├── DEPLOY.md                      # 部署文档
+     ├── 部署指南.md                    # 中文部署指南
+     ├── deploy-to-yupeng.sh            # 一键部署脚本
+     ├── quick-deploy.sh                # 快速部署脚本
+     ├── requirements.streamlit.txt     # Streamlit 依赖
+     └── .streamlit/secrets.template.toml  # 配置模板
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 🆘 遇到问题？
+
+1. 端口被占用:
+   sudo lsof -i :8501
+   sudo kill -9 <PID>
+
+2. Nginx 报错:
+   sudo nginx -t
+   sudo journalctl -u nginx -f
+
+3. 应用无法启动:
+   sudo journalctl -u ai-complaint -f
+
+4. SSL 证书问题:
+   sudo certbot certificates
+   sudo certbot renew
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## ✅ 推荐方案
+
+对于首次部署，强烈推荐使用 Streamlit Cloud：
+  ✅ 无需配置服务器
+  ✅ 自动 HTTPS
+  ✅ 免费额度足够使用
+  ✅ 一键部署
+
+生产环境或有特殊需求时再考虑 VPS 部署。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+下一步：
+  1. 选择部署方案
+  2. 准备相应账号（GitHub/VPS）
+  3. 按步骤执行
+  4. 验证功能
+  5. 配置 Telegram 通知
+
+需要我帮你执行哪一步？

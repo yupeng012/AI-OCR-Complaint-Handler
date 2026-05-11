@@ -1,0 +1,19 @@
+# Streamlit Cloud Deployment Configuration
+# https://docs.streamlit.io/streamlit-community-cloud/get-started
+
+# Requirements for Streamlit Cloud
+streamlit==1.28.0
+Pillow==10.0.0
+pandas==2.0.0
+openpyxl==3.1.0
+xlsxwriter==3.1.0
+requests==2.31.0
+
+# OCR dependencies
+pytesseract==0.3.10
+
+# AI/ML dependencies
+# (Add your specific AI model dependencies here)
+
+# Utilities
+python-dotenv==1.0.0

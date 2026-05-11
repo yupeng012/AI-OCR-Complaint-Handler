@@ -1,0 +1,22 @@
+[
+  {
+    "ticket_id": "TS20260511145940",
+    "timestamp": "2026-05-11T14:59:40.525830",
+    "text": "需要退货我",
+    "sentiment": "neutral",
+    "sentiment_score": 0.5,
+    "category": "Refund & Return",
+    "status": "new",
+    "priority": "medium"
+  },
+  {
+    "ticket_id": "TS20260511154339",
+    "timestamp": "2026-05-11T15:43:39.739319",
+    "text": "我需要退货，你的产品质量太差了",
+    "sentiment": "neutral",
+    "sentiment_score": 0.5,
+    "category": "Product Quality",
+    "status": "new",
+    "priority": "medium"
+  }
+]
